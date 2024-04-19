@@ -1,0 +1,38 @@
+{
+  "builder_name": "json",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "alpaca-persian",
+  "dataset_size": 49173954,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/sinarashidi/alpaca-persian@dd503f5445c61565e43e0a11bd27be6774669016/data.jsonl": {
+      "num_bytes": 49647433,
+      "checksum": null
+    }
+  },
+  "download_size": 49647433,
+  "features": {
+    "text": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 98821387,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 49173954,
+      "num_examples": 35117,
+      "dataset_name": "alpaca-persian"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}
