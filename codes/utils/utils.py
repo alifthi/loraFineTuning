@@ -7,7 +7,7 @@ class utils:
         self.modelName=MODEL_NAME
         self.data=self.loadData()
     def loadData(self,dataset=None):
-        return load_from_disk(self.dataDir) if isinstance(dataset,type(None)) else load_dataset(dataset)
+        return load_from_disk(self.dataDir,split='train') if isinstance(dataset,type(None)) else load_dataset(dataset,split='train')
     def preprocessing(self):
         self.tokenizer=AutoTokenizer.from_pretrained(self.modelName)
         

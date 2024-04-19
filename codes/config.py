@@ -1,2 +1,8 @@
 MODEL_NAME='Qwen/Qwen1.5-0.5B-Chat'
 DATA_DIR='../data/alpaca'
+
+'''LoRA configs'''
+LORA_R=64
+LORA_ALPHA=16
+LORA_DROPOUT=0.1
+TASK_TYPE='CAUSAL_LM'
