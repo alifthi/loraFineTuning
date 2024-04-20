@@ -19,5 +19,5 @@ class utils:
         assistantContent=text[1]
         chat=[{'role':'user','content':userContent},
               {'role':'assistant','content':assistantContent}]
-        chat=self.tokenizer.apply_chat_template(chat,tokenize=False,add_generation_prompt=True)
+        chat=self.tokenizer.apply_chat_template(chat,tokenize=False)
         return {'text':chat}
