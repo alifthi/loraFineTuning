@@ -7,7 +7,8 @@ from config import (MODEL_NAME, LORA_R, LORA_ALPHA,
                     EPOCHS, LEARNING_RATE, WEIGHT_DECAY, OPTIMIZER,
                     LR_SCHEDULAR, SAVE_STEPS, MAX_SEQ_LENGTH, MODEL_PATH)
 class Model:
-    def __init__(self,tokenizer,trainDataset) -> None:
+    def __init__(self,tokenizer,trainDataset,name) -> None:
+        self.name=name
         self.trainDataset=trainDataset
         self.tokenizer=tokenizer
         self.loadModel()
@@ -16,20 +17,21 @@ class Model:
         self.trainer.train()
     def setConfigs(self):
         self.loraConfig=LoraConfig(
-            lora_alpha=LORA_ALPHA,
-            r=LORA_R,
+           lora_alpha=LORA_ALPHA,
+           r=LORA_R,
             lora_dropout=LORA_DROPOUT,
             task_type=TASK_TYPE,
-            bias='none',
+            bias='all',
             target_modules=["q_proj", "k_proj"])
         self.trainingAguments=TrainingArguments(
-            output_dir=OUTPUTS_DIR,
+            output_dir=OUTPUTS_DIR[:-1]+'_'+self.name+'/',
             num_train_epochs=EPOCHS,
             optim=OPTIMIZER,
+            logging_steps=16,
             save_steps=SAVE_STEPS,
             learning_rate=LEARNING_RATE,
             weight_decay=WEIGHT_DECAY,
-            lr_scheduler_type=LR_SCHEDULAR,
+           lr_scheduler_type=LR_SCHEDULAR,
             report_to="tensorboard"
         )
         self.trainer=SFTTrainer(
@@ -46,6 +48,6 @@ class Model:
     def loadModel(self):
         self.model=AutoModelForCausalLM.from_pretrained(MODEL_NAME,device_map='auto')
     def saveModel(self):
-        self.model.save_pretrained(MODEL_PATH+self.modelName+'/')
+        self.model.save_pretrained(MODEL_PATH+self.modelName+'_'+self.name+'/')
     def quantizationConfig(self):
         pass

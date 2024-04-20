@@ -9,3 +9,6 @@ class main:
     def init(self):
         self.model.train()
         self.model.saveModel()
+if __name__=='__main__':
+    main=main('centralized')
+    main.init()
