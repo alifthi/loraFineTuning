@@ -5,7 +5,7 @@ from trl import SFTTrainer
 from config import (MODEL_NAME, LORA_R, LORA_ALPHA,  
                     LORA_DROPOUT, TASK_TYPE, OUTPUTS_DIR, 
                     EPOCHS, LEARNING_RATE, WEIGHT_DECAY, OPTIMIZER,
-                    LR_SCHEDULAR, SAVE_STEPS, MAX_SEQ_LENGTH)
+                    LR_SCHEDULAR, SAVE_STEPS, MAX_SEQ_LENGTH, MODEL_PATH)
 class Model:
     def __init__(self,tokenizer,trainDataset) -> None:
         self.trainDataset=trainDataset
@@ -46,6 +46,6 @@ class Model:
     def loadModel(self):
         self.model=AutoModelForCausalLM.from_pretrained(MODEL_NAME,device_map='auto')
     def saveModel(self):
-        pass
+        self.model.save_pretrained(MODEL_PATH+self.modelName+'/')
     def quantizationConfig(self):
         pass
